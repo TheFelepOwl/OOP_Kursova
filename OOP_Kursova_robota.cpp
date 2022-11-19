@@ -217,6 +217,12 @@ int main()
 	cout << "Input Months: ";
 	cin >> months;
 
+	if (months < 1 || months>12)
+	{
+		cout << "Months can get value 1-12!!!!";
+		return 0;
+	}
+
 	Print_arr(p, months);
 
 	cout << "Do u want write this information in FILE? y/n: ";
