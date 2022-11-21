@@ -52,7 +52,7 @@ public:
 		cout << "Date: ";
 		for (int i = 0; i < 3; i++)
 		{
-			cout << date[i] << ".";
+			cout <<date[i] << ".";
 		}
 
 		cout << "\n";
@@ -61,7 +61,7 @@ public:
 
 	void Print()
 	{
-		cout << "\nName: " << name << "\nTelefon" << telefon << endl;
+		cout << "\nName: " << name << "\nTelefon: " << telefon << endl;
 		cout << "Date: ";
 		for (int j = 0; j < 3; j++)
 		{
@@ -86,7 +86,7 @@ public:
 
 		else
 		{
-			fout << "\nName: " << name << "\nTelefon" << telefon;
+			fout << "\nName: " << name << "\nTelefon: " << telefon;
 			fout << "\nDate: ";
 			for (int j = 0; j < 3; j++)
 			{
@@ -130,11 +130,10 @@ Person Input(Person* p)
 
 	cout << "List of DATE:\n";
 	for (int i = 0; i < Size; i++)
-	{
+	{	
+		cout << i + 1 << ". ";
 		p[i].Print_date();
 	}
-
-
 
 	return *p;
 }
@@ -148,7 +147,7 @@ Person Sort(Person* p)
 		{
 			if (p[j].name[0] > p[j + 1].name[0])
 			{
-				// меняем элементы местами
+				
 				temp = p[j];
 				p[j] = p[j + 1];
 				p[j + 1] = temp;
@@ -166,13 +165,16 @@ void Print_arr(Person* p, int months)
 
 	for (int i = 0; i < Size; i++)
 		if (months == 0 || months == p[i].date[1])
-		{
+		{	
+			
 			p[i].Print();
 			counter = 1;
 		}
 
 	if (counter == 0)
 		cout << "EMPTY!!!!!!!";
+
+		
 
 	cout << "\n\n";
 	counter = 0;
@@ -204,7 +206,7 @@ int main()
 
 	Input(p);
 
-	cout << "Do u want watt FULL data??? y/n: ";
+	cout << "Do u want watch FULL data??? y/n: ";
 	cin >> agree;
 
 
@@ -214,25 +216,27 @@ int main()
 	agree = 'n';
 	Sort(p);
 
-	cout << "Input Months: ";
-	cin >> months;
+	jump:
 
-	if (months < 1 || months>12)
-	{
-		cout << "Months can get value 1-12!!!!";
+		cout << "\nInput Months ( value 1-12 ): ";
+		cin >> months;
+
+		if (months < 1 || months>12)
+		{
+			cout << "Months can get this value only 1-12!!!!";
+			goto jump;
+		}
+
+		Print_arr(p, months);
+
+		cout << "Do u want write this information in FILE? y/n: ";
+		cin >> agree;
+
+		if (agree == 'y')
+			Write_arr(p, months);
+
+
 		return 0;
-	}
-
-	Print_arr(p, months);
-
-	cout << "Do u want write this information in FILE? y/n: ";
-	cin >> agree;
-
-	if (agree == 'y')
-		Write_arr(p, months);
-
-
-	return 0;
 
 
 }
